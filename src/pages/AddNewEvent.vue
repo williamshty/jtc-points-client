@@ -5,7 +5,7 @@
       <v-ons-list-header>Name and Description</v-ons-list-header>
       <v-ons-list-item :modifier="$ons.platform.isAndroid() ? 'nodivider' : ''">
         <div class="left">
-          Event Name
+          Event Name&nbsp;&nbsp;
         </div>
         <label class="center">
           <v-ons-input float maxlength="20"
@@ -16,7 +16,7 @@
       </v-ons-list-item>
        <v-ons-list-item :modifier="$ons.platform.isAndroid() ? 'nodivider' : ''">
         <div class="left">
-          Event Description
+          Event Description&nbsp;&nbsp;
         </div>
         <label class="center">
           <textarea class="textarea textarea--transparent" 
@@ -25,10 +25,10 @@
           v-model="form.description"></textarea>
         </label>
       </v-ons-list-item>
-      <v-ons-list-header>Start</v-ons-list-header>
+      <v-ons-list-header>Start and End</v-ons-list-header>
       <v-ons-list-item :modifier="$ons.platform.isAndroid() ? 'nodivider' : ''">
         <div class="left">
-          <v-ons-icon icon="ion-ios-calendar" class="list-item__icon"></v-ons-icon>
+          <v-ons-icon icon="ion-ios-calendar" class="list-item__icon"></v-ons-icon>&nbsp;&nbsp;&nbsp;&nbsp;
         </div>
         <label class="center">
           <v-ons-input float maxlength="20"
@@ -39,7 +39,7 @@
       </v-ons-list-item>
       <v-ons-list-item :modifier="$ons.platform.isAndroid() ? 'nodivider' : ''">
         <div class="left">
-          <v-ons-icon icon="ion-clock" class="list-item__icon"></v-ons-icon>
+          <v-ons-icon icon="ion-clock" class="list-item__icon"></v-ons-icon>&nbsp;&nbsp;&nbsp;&nbsp;
         </div>
         <label class="center">
           <v-ons-input float maxlength="20"
@@ -50,7 +50,7 @@
       </v-ons-list-item>
       <v-ons-list-item :modifier="$ons.platform.isAndroid() ? 'nodivider' : ''">
         <div class="left">
-          <v-ons-icon icon="ion-clock" class="list-item__icon"></v-ons-icon>
+          <v-ons-icon icon="ion-clock" class="list-item__icon"></v-ons-icon>&nbsp;&nbsp;&nbsp;&nbsp;
         </div>
         <label class="center">
           <v-ons-input float maxlength="20"
@@ -62,7 +62,7 @@
        <v-ons-list-header>Address</v-ons-list-header>
       <v-ons-list-item :modifier="$ons.platform.isAndroid() ? 'nodivider' : ''">
         <div class="left">
-          Address
+          Address&nbsp;&nbsp;
         </div>
         <label class="center">
           <v-ons-input float maxlength="100"
@@ -73,7 +73,7 @@
       </v-ons-list-item>
        <v-ons-list-item :modifier="$ons.platform.isAndroid() ? 'nodivider' : ''">
         <div class="left">
-          Venue
+          Venue&nbsp;&nbsp;
         </div>
         <label class="center">
           <v-ons-input float maxlength="20"
@@ -84,7 +84,7 @@
       </v-ons-list-item>
       <v-ons-list-item :modifier="$ons.platform.isAndroid() ? 'nodivider' : ''">
         <div class="left">
-          Zip Code
+          Zip Code&nbsp;&nbsp;
         </div>
         <label class="center">
           <v-ons-input float maxlength="20"

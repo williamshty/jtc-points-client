@@ -15,8 +15,10 @@
     "onsenui": "~2.8.0",
     "vue": "^2.5.3",
     "vue-onsenui": "~2.4.0",
+    "vue-password-strength-meter": "^1.2.1",
     "vue-qrcode-reader": "^0.7.3",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "zxcvbn": "^4.4.2"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

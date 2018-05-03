@@ -13,6 +13,7 @@ import VueQrcodeReader from 'vue-qrcode-reader'
 import storeLike from './store.js';
 import CustomToolbar from './partials/CustomToolbar.vue';
 import AppNavigator from './AppNavigator.vue';
+// import Password from 'vue-password-strength-meter'
 // (function() {
 //   if('serviceWorker' in navigator) {
 //     navigator.serviceWorker.register('/service-worker.js');
@@ -24,6 +25,7 @@ console.log(Vue.prototype.$http.defaults.baseURL)
 Vue.use(Vuex);
 Vue.use(VueOnsen);
 Vue.use(VueQrcodeReader);
+// Vue.use(Password)
 
 // Register components globally
 // Object.values(OnsenComponents).forEach(component => Vue.component(component.name, component)); // For ESM

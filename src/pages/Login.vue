@@ -12,7 +12,7 @@
       </v-ons-list-item>
         <v-ons-list-item :modifier="$ons.platform.isAndroid() ? 'nodivider' : ''">
         <div class="left">
-          username
+          username&nbsp;&nbsp;&nbsp;
         </div>
         <label class="center">
           <v-ons-input float maxlength="40"
@@ -23,7 +23,7 @@
       </v-ons-list-item>
         <v-ons-list-item :modifier="$ons.platform.isAndroid() ? 'nodivider' : ''">
         <div class="left">
-          password
+          password&nbsp;&nbsp;&nbsp;
         </div>
         <label class="center">
           <v-ons-input float maxlength="40"
