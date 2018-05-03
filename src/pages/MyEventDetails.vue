@@ -1,56 +1,73 @@
 <template>
-  <v-ons-page>
-    <custom-toolbar v-bind="toolbarInfo" :title="eventDetail.name" right="delete"></custom-toolbar>
-      <v-ons-card>
-      <div class="title">
-        {{eventDetail.name}}
-      </div>
-      <v-ons-carousel fullscreen swipeable auto-scroll overscrollable
-      :index.sync="carouselIndex">
-      <v-ons-carousel-item>
-        <img :src="baseUrl+'event/avatar/'+eventDetail.eventId" :alt="eventDetail.name" style="width:100%">
-      </v-ons-carousel-item>
-       <v-ons-carousel-item>
-        <img :src="baseUrl+'event/qr/'+eventDetail.eventId" :alt="eventDetail.name" style="width:100%">
-      </v-ons-carousel-item>
-    </v-ons-carousel>
-      <v-ons-row>
-        
-        <v-ons-col width="40px"><v-ons-icon icon="ion-ios-calendar" size="30px"></v-ons-icon> </v-ons-col>
-        <v-ons-col vertical-align="center"><b style="font-size:16px;">{{parseDate(eventDetail.end.substr(0,10))}}</b></v-ons-col>
-        <v-ons-col width="40px"><v-ons-icon icon="ion-clock" size="30px"></v-ons-icon> </v-ons-col>
-        <v-ons-col vertical-align="center"><b style="font-size:16px;">{{parseTime(eventDetail.start.substr(11,5))}} to {{parseTime(eventDetail.end.substr(11,5))}}</b></v-ons-col>
-      </v-ons-row>
-       <v-ons-row>
-        <v-ons-col width="40px" vertical-align="center"><v-ons-icon icon="ion-android-pin" size="30px"></v-ons-icon> </v-ons-col>
-        <v-ons-col vertical-align="center"><b style="font-size:16px;padding-top:10px;">{{eventDetail.address}}<br/>Singapore {{eventDetail.zip}}</b></v-ons-col>
-      </v-ons-row>
-      <v-ons-row style="height:20px;"></v-ons-row>
-       <v-ons-row>
-           Description
-       </v-ons-row>
-       <v-ons-row style="height:20px;"></v-ons-row>
-       <v-ons-row>
-           <v-ons-col>{{eventDetail.description}}</v-ons-col>
-       </v-ons-row>
-       <v-ons-card>
-         <v-ons-button modifier="large" style="background-color:#26A65B" @click="push(EditEvent)">Edit</v-ons-button>
-       </v-ons-card>
-       <v-ons-card>
-         <v-ons-button modifier="large" style="background-color:#C0392B" @click="deleteDialogVisible = true">Delete</v-ons-button>
-       </v-ons-card>
-    </v-ons-card>
-    <v-ons-alert-dialog modifier="rowfooter"
-      :visible.sync="deleteDialogVisible"
-    >
-      <span slot="title">Confirm Deletion</span>
-      Please note that your points spent to create this event will not be refunded after you delete this event.
-      <template slot="footer">
-        <v-ons-alert-dialog-button @click="deleteDialogVisible = false">Cancel</v-ons-alert-dialog-button>
-        <v-ons-alert-dialog-button @click="deleteEvent()" style="color:red">Confirm</v-ons-alert-dialog-button>
-      </template>
-    </v-ons-alert-dialog>
-  </v-ons-page>
+    <v-ons-page>
+        <custom-toolbar v-bind="toolbarInfo" title="My Event Detail"></custom-toolbar>
+        <v-ons-card>
+            <div class="title">
+                {{eventDetail.name}}
+            </div>
+            <v-ons-carousel fullscreen swipeable auto-scroll overscrollable :index.sync="carouselIndex">
+                <v-ons-carousel-item>
+                    <img :src="baseUrl+'event/avatar/'+eventDetail.eventId" :alt="eventDetail.name" style="width:100%">
+                </v-ons-carousel-item>
+                <v-ons-carousel-item>
+                    <img :src="baseUrl+'event/qr/'+eventDetail.eventId" :alt="eventDetail.name" style="width:100%">
+                </v-ons-carousel-item>
+            </v-ons-carousel>
+            <v-ons-card>
+                <v-ons-row>Swipe right on the picture to view your event QR code</v-ons-row>
+            </v-ons-card>
+            <v-ons-card>
+                <v-ons-row>
+                    <v-ons-col width="30px">
+                        <v-ons-icon icon="ion-ios-calendar" size="30px"></v-ons-icon>
+                    </v-ons-col>
+                    <v-ons-col vertical-align="center">
+                        <b style="font-size:16px;">{{parseDate(eventDetail.end.substr(0,10))}}</b>
+                    </v-ons-col>
+                    <v-ons-col width="30px">
+                        <v-ons-icon icon="ion-clock" size="30px"></v-ons-icon>
+                    </v-ons-col>
+                    <v-ons-col vertical-align="center">
+                        <b style="font-size:16px;">{{parseTime(eventDetail.start.substr(11,5))}} to {{parseTime(eventDetail.end.substr(11,5))}}</b>
+                    </v-ons-col>
+                </v-ons-row>
+                <div style="height:10px;"></div>
+                <v-ons-row>
+                    <v-ons-col width="30px" vertical-align="center">
+                        <v-ons-icon icon="ion-android-pin" size="30px"></v-ons-icon>
+                    </v-ons-col>
+                    <v-ons-col vertical-align="center">
+                        <b style="font-size:16px;padding-top:10px;">{{eventDetail.address}}
+                            <br/>Singapore {{eventDetail.zip}}</b>
+                    </v-ons-col>
+                </v-ons-row>
+            </v-ons-card>
+            <v-ons-card>
+                <v-ons-row style="height:20px;"></v-ons-row>
+                <v-ons-row>
+                    Description
+                </v-ons-row>
+                <v-ons-row style="height:20px;"></v-ons-row>
+                <v-ons-row>
+                    <v-ons-col>{{eventDetail.description}}</v-ons-col>
+                </v-ons-row>
+            </v-ons-card>
+            <v-ons-card>
+                <v-ons-button modifier="large" style="background-color:#26A65B" @click="push(EditEvent)">Edit</v-ons-button>
+            </v-ons-card>
+            <v-ons-card>
+                <v-ons-button modifier="large" style="background-color:#C0392B" @click="deleteDialogVisible = true">Delete</v-ons-button>
+            </v-ons-card>
+        </v-ons-card>
+        <v-ons-alert-dialog modifier="rowfooter" :visible.sync="deleteDialogVisible">
+            <span slot="title">Confirm Deletion</span>
+            Please note that your points spent to create this event will not be refunded after you delete this event.
+            <template slot="footer">
+                <v-ons-alert-dialog-button @click="deleteDialogVisible = false">Cancel</v-ons-alert-dialog-button>
+                <v-ons-alert-dialog-button @click="deleteEvent()" style="color:red">Confirm</v-ons-alert-dialog-button>
+            </template>
+        </v-ons-alert-dialog>
+    </v-ons-page>
 </template>
 
 <script>

@@ -7,12 +7,12 @@
                 <v-ons-list-item :modifier="$ons.platform.isAndroid() ? 'nodivider' : ''">
 
                     <label class="center">
-                        Key in your credentials below
+                        Welcome to Join JTC Points!
                     </label>
                 </v-ons-list-item>
                 <v-ons-list-item :modifier="$ons.platform.isAndroid() ? 'nodivider' : ''">
                     <div class="left">
-                        username
+                        username&nbsp;&nbsp;&nbsp;
                     </div>
                     <label class="center">
                         <v-ons-input float maxlength="40" type="text" placeholder="user name" v-model="username">
@@ -34,7 +34,7 @@
                 </v-ons-list-item>
                 <v-ons-list-item :modifier="$ons.platform.isAndroid() ? 'nodivider' : ''">
                     <div class="left">
-                        confirm
+                        confirm&nbsp;&nbsp;&nbsp;
                     </div>
                     <label class="center">
                         <v-ons-input float maxlength="40" type="password" placeholder="enter your password again" v-model="password2">

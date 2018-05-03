@@ -1,30 +1,47 @@
 <template>
   <v-ons-page>
-    <custom-toolbar v-bind="toolbarInfo" :title="eventDetail.name"></custom-toolbar>
+    <custom-toolbar v-bind="toolbarInfo" title="Event Detail"></custom-toolbar>
       <v-ons-card>
       <div class="title">
         {{eventDetail.name}}
       </div>
       <img :src="baseUrl+'event/avatar/'+eventDetail.eventId" :alt="eventDetail.name" style="width:100%">
-      <v-ons-row>
-        
-        <v-ons-col width="40px"><v-ons-icon icon="ion-ios-calendar" size="30px"></v-ons-icon> </v-ons-col>
-        <v-ons-col vertical-align="center"><b style="font-size:16px;">{{parseDate(eventDetail.end.substr(0,10))}}</b></v-ons-col>
-        <v-ons-col width="40px"><v-ons-icon icon="ion-clock" size="30px"></v-ons-icon> </v-ons-col>
-        <v-ons-col vertical-align="center"><b style="font-size:16px;">{{parseTime(eventDetail.start.substr(11,5))}} to {{parseTime(eventDetail.end.substr(11,5))}}</b></v-ons-col>
-      </v-ons-row>
-       <v-ons-row>
-        <v-ons-col width="40px" vertical-align="center"><v-ons-icon icon="ion-android-pin" size="30px"></v-ons-icon> </v-ons-col>
-        <v-ons-col vertical-align="center"><b style="font-size:16px;padding-top:10px;">{{eventDetail.address}}<br/>Singapore {{eventDetail.zip}}</b></v-ons-col>
-      </v-ons-row>
-      <v-ons-row style="height:20px;"></v-ons-row>
-       <v-ons-row>
-           Description
-       </v-ons-row>
-       <v-ons-row style="height:20px;"></v-ons-row>
-       <v-ons-row>
-           <v-ons-col>{{eventDetail.description}}</v-ons-col>
-       </v-ons-row>
+      <v-ons-card>
+                <v-ons-row>
+                    <v-ons-col width="30px">
+                        <v-ons-icon icon="ion-ios-calendar" size="30px"></v-ons-icon>
+                    </v-ons-col>
+                    <v-ons-col vertical-align="center">
+                        <b style="font-size:16px;">{{parseDate(eventDetail.end.substr(0,10))}}</b>
+                    </v-ons-col>
+                    <v-ons-col width="30px">
+                        <v-ons-icon icon="ion-clock" size="30px"></v-ons-icon>
+                    </v-ons-col>
+                    <v-ons-col vertical-align="center">
+                        <b style="font-size:16px;">{{parseTime(eventDetail.start.substr(11,5))}} to {{parseTime(eventDetail.end.substr(11,5))}}</b>
+                    </v-ons-col>
+                </v-ons-row>
+                <div style="height:10px;"></div>
+                <v-ons-row>
+                    <v-ons-col width="30px" vertical-align="center">
+                        <v-ons-icon icon="ion-android-pin" size="30px"></v-ons-icon>
+                    </v-ons-col>
+                    <v-ons-col vertical-align="center">
+                        <b style="font-size:16px;padding-top:10px;">{{eventDetail.address}}
+                            <br/>Singapore {{eventDetail.zip}}</b>
+                    </v-ons-col>
+                </v-ons-row>
+            </v-ons-card>
+            <v-ons-card>
+                <v-ons-row style="height:20px;"></v-ons-row>
+                <v-ons-row>
+                    Description
+                </v-ons-row>
+                <v-ons-row style="height:20px;"></v-ons-row>
+                <v-ons-row>
+                    <v-ons-col>{{eventDetail.description}}</v-ons-col>
+                </v-ons-row>
+            </v-ons-card>
     </v-ons-card>
   </v-ons-page>
 </template>
