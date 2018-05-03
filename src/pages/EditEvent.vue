@@ -1,6 +1,6 @@
 <template>
   <v-ons-page>
-    <custom-toolbar v-bind="toolbarInfo"></custom-toolbar>
+    <custom-toolbar v-bind="toolbarInfo" title="Edit" :backLabel="this.$store.state.ajax.currentEvent.name"></custom-toolbar>
     <v-ons-list>
       <v-ons-list-header>Name and Description</v-ons-list-header>
       <v-ons-list-item :modifier="$ons.platform.isAndroid() ? 'nodivider' : ''">
@@ -9,7 +9,7 @@
         </div>
         <label class="center">
           <v-ons-input float maxlength="20"
-            type="text" placeholder="name" v-model="form.name"
+            type="text" placeholder="name" v-model="form.name" :value="eventDetail.name"
           >
           </v-ons-input>
         </label>
@@ -25,21 +25,21 @@
           v-model="form.description"></textarea>
         </label>
       </v-ons-list-item>
-      <v-ons-list-header>Start</v-ons-list-header>
+      <v-ons-list-header>Time</v-ons-list-header>
       <v-ons-list-item :modifier="$ons.platform.isAndroid() ? 'nodivider' : ''">
         <div class="left">
-          <v-ons-icon icon="ion-ios-calendar" class="list-item__icon"></v-ons-icon>
+          Date
         </div>
         <label class="center">
           <v-ons-input float maxlength="20"
-            type="date" v-model="form.startDate"
+            type="date" v-model="form.startDate" 
           >
           </v-ons-input>
         </label>
       </v-ons-list-item>
       <v-ons-list-item :modifier="$ons.platform.isAndroid() ? 'nodivider' : ''">
         <div class="left">
-          <v-ons-icon icon="ion-clock" class="list-item__icon"></v-ons-icon>
+          Start
         </div>
         <label class="center">
           <v-ons-input float maxlength="20"
@@ -50,7 +50,7 @@
       </v-ons-list-item>
       <v-ons-list-item :modifier="$ons.platform.isAndroid() ? 'nodivider' : ''">
         <div class="left">
-          <v-ons-icon icon="ion-clock" class="list-item__icon"></v-ons-icon>
+          End
         </div>
         <label class="center">
           <v-ons-input float maxlength="20"
@@ -93,7 +93,7 @@
           </v-ons-input>
         </label>
       </v-ons-list-item>
-      <v-ons-list-header>Event Picture</v-ons-list-header>
+      <!-- <v-ons-list-header>Event Picture</v-ons-list-header>
       <v-ons-list-item :modifier="$ons.platform.isAndroid() ? 'nodivider' : ''">
         <div class="left">
           Picture
@@ -101,7 +101,7 @@
         <label class="center">
           <input type="file" @change="onFileChange">
         </label>
-      </v-ons-list-item>
+      </v-ons-list-item> -->
     </v-ons-list>
           <v-ons-card>
               <v-ons-button modifier="large" @click="onFormSubmit()">Submit</v-ons-button>
@@ -114,18 +114,24 @@ export default {
   data() {
     return {
       state: 'initial',
+      eventDetail: this.$store.state.ajax.currentEvent,
       form: {
-        name: '',
-        startDate: '',
-        startTime: '',
-        endTime: '',
-        address: '',
-        venue: '',
-        zip: '',
-        description: '',
-        id:''
+        name: this.$store.state.ajax.currentEvent.name,
+        startDate: this.$store.state.ajax.currentEvent.start.substr(0,10),
+        startTime: this.parsedTime(this.$store.state.ajax.currentEvent.start),
+        endTime: this.parsedTime(this.$store.state.ajax.currentEvent.end),
+        address: this.$store.state.ajax.currentEvent.address,
+        venue: this.$store.state.ajax.currentEvent.venue,
+        zip: this.$store.state.ajax.currentEvent.zip,
+        description: this.$store.state.ajax.currentEvent.description,
+        id:this.$store.state.ajax.currentEvent.eventId
       }
     };
+  },
+  computed: {
+    
+  },
+  watch: {
   },
 
   methods: {
@@ -144,9 +150,14 @@ export default {
         venue:this.form.venue,
         zip:this.form.zip,
         description:this.form.description,
-        id:this.$store.state.ajax.currentEventIdForUpload
+        id:this.form.id
       }
-      this.$store.dispatch("ajax/addNewEvent", payload)
+      this.$store.dispatch("ajax/editEvent", payload)
+    },
+    parsedTime(time) {
+      var newTime = (parseInt(time.substr(11,2))+8)%24
+      if (newTime===0) newTime='00'
+      return(newTime+':00')
     }
   }
 };

@@ -2,7 +2,7 @@
   <v-ons-page :style="swipePosition">
     <custom-toolbar :style="swipeTheme" modifier="white-content">
       {{ title }}
-      <v-ons-toolbar-button slot="right" modifier="white-content"
+      <v-ons-toolbar-button slot="left" modifier="white-content"
         @click="$store.commit('splitter/toggle');"
       >
         <v-ons-icon icon="ion-navicon, material:md-menu"></v-ons-icon>
@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import Products from './pages/Products.vue'
 import Camera from './pages/Camera.vue';
 import Home from './pages/Home.vue';
 import Forms from './pages/Forms.vue';
@@ -44,10 +45,18 @@ export default {
       animationOptions: {},
       topPosition: 0,
       tabs: [
+        // {
+        //   label: this.md ? null : 'Camera',
+        //   icon: 'ion-camera, material:md-camera',
+        //   page: Camera,
+        //   theme: red,
+        //   style: this.md ? { maxWidth: '60px' } : {},
+        //   top: -105 // Toolbar + Tabbar heights
+        // },
         {
-          label: this.md ? null : 'Camera',
-          icon: 'ion-camera, material:md-camera',
-          page: Camera,
+          label: this.md ? null : 'Products',
+          icon: this.md ? null : 'ion-ios-cart',
+          page: Products,
           theme: red,
           style: this.md ? { maxWidth: '60px' } : {},
           top: -105 // Toolbar + Tabbar heights
@@ -65,8 +74,8 @@ export default {
           theme: blue
         },
         {
-          label: 'Home',
-          icon: this.md ? null : 'ion-home',
+          label: 'Account',
+          icon: this.md ? null : 'ion-android-person',
           page: Home,
           theme: red
         }

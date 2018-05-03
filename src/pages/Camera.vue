@@ -1,7 +1,28 @@
 <template>
   <v-ons-page>
-    <!-- <qrcode-reader @decode="onDecode"></qrcode-reader>
-    <h3>Your QR Content is: {{QR_Content}}</h3> -->
+    <custom-toolbar v-bind="toolbarInfo"></custom-toolbar>
+    <qrcode-reader @decode="onDecode"></qrcode-reader>
+    <h3 v-if="this.QR_Content!==''">QR Content Loaded! Please wait</h3>
+    <v-ons-alert-dialog modifier="rowfooter"
+      :visible.sync="attendSuccessDialogVisible"
+    >
+      <span slot="title">Congratulations!</span>
+      You have successfully signed attendence to Event {{this.$store.state.ajax.attendEventStatus.name}}
+      <template slot="footer">
+        <v-ons-alert-dialog-button @click="attendSuccessDialogVisible = false">Cancel</v-ons-alert-dialog-button>
+        <v-ons-alert-dialog-button @click="attendSuccessDialogVisible = false">Confirm</v-ons-alert-dialog-button>
+      </template>
+    </v-ons-alert-dialog>
+    <v-ons-alert-dialog modifier="rowfooter"
+      :visible.sync="attendFailDialogVisible"
+    >
+      <span slot="title">Attendence Failed</span>
+      Please make sure you have scanned the correct QR code.
+      <template slot="footer">
+        <v-ons-alert-dialog-button @click="attendFailDialogVisible = false">Cancel</v-ons-alert-dialog-button>
+        <v-ons-alert-dialog-button @click="attendFailDialogVisible = false">Confirm</v-ons-alert-dialog-button>
+      </template>
+    </v-ons-alert-dialog>
   </v-ons-page>
 </template>
 
@@ -11,13 +32,31 @@ export default {
   data() {
     return {
       state: 'initial',
-      QR_Content: ''
+      QR_Content: '',
+      attendSuccessDialogVisible: false,
+      attendFailDialogVisible:false
     };
+  },
+  computed: {
+      isAttended () {
+          return this.$store.state.ajax.attendEventStatus
+      }
+  },
+  watch: {
+      isAttended(value) {
+          if(value===false) {
+              this.attendFailDialogVisible = true
+          }
+          else{
+            this.attendSuccessDialogVisible = true
+          }
+      }
   },
   methods: {
     onDecode (content) {
       console.log(content)
       this.QR_Content = content
+      this.$store.dispatch('ajax/attendEvent', {encode: content})
     }
   }
 };

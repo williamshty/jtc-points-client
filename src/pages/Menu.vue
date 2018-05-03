@@ -2,10 +2,20 @@
   <v-ons-page modifier="white">
    <v-ons-list-title>Access</v-ons-list-title>
     <v-ons-list>
-      <v-ons-list-item v-for="(item, index) in access" :key="item.title"
+      <v-ons-list-item @click="logout()">
+        <div class="left">
+          <v-ons-icon fixed-width class="list-item__icon" icon="ion-android-exit"></v-ons-icon>
+        </div>
+        <div class="center">
+          Log Out
+        </div>
+        <div class="right">
+          <!-- <v-ons-icon icon="fa-link"></v-ons-icon> -->
+        </div>
+      </v-ons-list-item>
+      <!-- <v-ons-list-item v-for="(item, index) in access" :key="item.title"
         :modifier="md && 'nodivider'"
-        @click="loadView(index)"
-      >
+        @click="loadView(index)">
         <div class="left">
           <v-ons-icon fixed-width class="list-item__icon" :icon="item.icon"></v-ons-icon>
         </div>
@@ -15,9 +25,9 @@
         <div class="right">
           <v-ons-icon icon="fa-link"></v-ons-icon>
         </div>
-      </v-ons-list-item>
+      </v-ons-list-item> -->
     </v-ons-list>
-    <v-ons-list-title style="margin-top: 10px">Links</v-ons-list-title>
+    <!-- <v-ons-list-title style="margin-top: 10px">Links</v-ons-list-title>
     <v-ons-list>
       <v-ons-list-item v-for="item in links" :key="item.title"
         @click="loadLink(item.url)"
@@ -32,11 +42,12 @@
           <v-ons-icon icon="fa-external-link"></v-ons-icon>
         </div>
       </v-ons-list-item>
-    </v-ons-list>
+    </v-ons-list> -->
   </v-ons-page>
 </template>
 
 <script>
+import Login from './Login.vue'
 export default {
   methods: {
     loadView(index) {
@@ -45,6 +56,9 @@ export default {
     },
     loadLink(url) {
       window.open(url, '_blank');
+    },
+    logout() {
+      this.$store.dispatch('ajax/logout')
     }
   },
   data() {
