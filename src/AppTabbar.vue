@@ -54,12 +54,10 @@ export default {
         //   top: -105 // Toolbar + Tabbar heights
         // },
         {
-          label: this.md ? null : 'Products',
+          label: 'Products',
           icon: this.md ? null : 'ion-ios-cart',
           page: Products,
           theme: red,
-          style: this.md ? { maxWidth: '60px' } : {},
-          top: -105 // Toolbar + Tabbar heights
         },
         {
           label: 'Happenings',

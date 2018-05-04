@@ -4,11 +4,13 @@
 
             <v-ons-card style="background-color:#F4D03F;height:40%;">
                 <v-ons-icon icon="md-balance-wallet" size="100px" style="position:absolute;left:50%;top:-4%;transform:translate(-50%,50%)"></v-ons-icon>
-                <h1 style="text-align:center;vertical-align:middle;margin-top:35%;font-size:40px;">{{this.$store.state.ajax.wallet.balance}} pts</h1>
+                <h4 style="text-align:center;vertical-align:middle;margin-top:35%;font-size:20px;">Your Balance:</h4>
+                <h1 style="text-align:center;vertical-align:middle;margin-top:5%;font-size:40px;">
+                    {{this.$store.state.ajax.wallet.balance}} points</h1>
             </v-ons-card>
-            <v-ons-card>
+            <!-- <v-ons-card>
                 <p>This is the balance points you can use to redeem products and create events</p>
-            </v-ons-card>
+            </v-ons-card> -->
             <v-ons-card>
                 <v-ons-segment style="width: 100%;">
                     <button @click="loadView(-1)">Products</button>

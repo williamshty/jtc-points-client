@@ -73,6 +73,7 @@ export default {
         redeemStatus: '',
         signupStatus: '',
         addEventStatus: '',
+        editEventStatus: '',
         currentEventId: '',
         currentEventIdForUpload: '',
         currentEvent: {},
@@ -111,6 +112,9 @@ export default {
         },
         setAddEventStatus(state, addEventStatus) {
           state.addEventStatus = addEventStatus
+        },
+        setEditEventStatus(state, editEventStatus) {
+          state.editEventStatus = editEventStatus
         },
         setAllEvents(state, allEvents) {
           state.allEvents = allEvents
@@ -323,14 +327,14 @@ export default {
             context.dispatch("getOwnEvent")
             context.dispatch("getAllEvent")
             context.dispatch("getWallet")
-            // context.commit("setAddEventStatus", true)
+            context.commit("setEditEventStatus", true)
             // context.commit("setCurrentEventId", '')
             this.commit('navigator/pop', {root:true})
             this.commit('navigator/pop', {root:true})
           })
           .catch(err => {
             console.log(err.error)
-            // context.commit("setAddEventStatus", false)
+            context.commit("setEditEventStatus", false)
           })
         },
         deleteEvent(context, credentials) {

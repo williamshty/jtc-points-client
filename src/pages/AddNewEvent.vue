@@ -36,9 +36,14 @@
           <b style="color:#96281B;">Please make sure you have entered all fields for date and time</b>
         </label>
       </v-ons-list-item>
+      <v-ons-list-item :modifier="$ons.platform.isAndroid() ? 'nodivider' : ''" v-if="!this.$moment(form.startDate).isAfter(new Date())&&form.startDate!==''">
+        <label class="center">
+          <b style="color:#96281B;">Please make sure you enter a date later than today</b>
+        </label>
+      </v-ons-list-item>
       <v-ons-list-item :modifier="$ons.platform.isAndroid() ? 'nodivider' : ''">
         <div class="left">
-          <v-ons-icon icon="ion-ios-calendar" class="list-item__icon"></v-ons-icon>&nbsp;&nbsp;&nbsp;&nbsp;
+          Date
         </div>
         <label class="center">
           <v-ons-input float maxlength="20"
@@ -49,7 +54,7 @@
       </v-ons-list-item>
       <v-ons-list-item :modifier="$ons.platform.isAndroid() ? 'nodivider' : ''">
         <div class="left">
-          <v-ons-icon icon="ion-clock" class="list-item__icon"></v-ons-icon>&nbsp;&nbsp;&nbsp;&nbsp;
+          Start
         </div>
         <label class="center">
           <v-ons-input float maxlength="20"
@@ -60,7 +65,7 @@
       </v-ons-list-item>
       <v-ons-list-item :modifier="$ons.platform.isAndroid() ? 'nodivider' : ''">
         <div class="left">
-          <v-ons-icon icon="ion-clock" class="list-item__icon"></v-ons-icon>&nbsp;&nbsp;&nbsp;&nbsp;
+          End
         </div>
         <label class="center">
           <v-ons-input float maxlength="20"

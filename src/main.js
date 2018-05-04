@@ -13,6 +13,7 @@ import VueQrcodeReader from 'vue-qrcode-reader'
 import storeLike from './store.js';
 import CustomToolbar from './partials/CustomToolbar.vue';
 import AppNavigator from './AppNavigator.vue';
+import moment from 'moment'
 // import Password from 'vue-password-strength-meter'
 // (function() {
 //   if('serviceWorker' in navigator) {
@@ -25,6 +26,8 @@ console.log(Vue.prototype.$http.defaults.baseURL)
 Vue.use(Vuex);
 Vue.use(VueOnsen);
 Vue.use(VueQrcodeReader);
+
+Object.defineProperty(Vue.prototype, '$moment', { get () { return moment } })
 // Vue.use(Password)
 
 // Register components globally
@@ -35,6 +38,7 @@ new Vue({
   el: '#app',
   render: h => h(AppNavigator),
   store: new Vuex.Store(storeLike),
+  moment,
   beforeCreate() {
     // Shortcut for Material Design
     Vue.prototype.md = this.$ons.platform.isAndroid();
