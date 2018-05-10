@@ -2,7 +2,28 @@
   <v-ons-page>
     <custom-toolbar v-bind="toolbarInfo"></custom-toolbar>
     <v-ons-list>
-      <v-ons-list-header>Name and Description</v-ons-list-header>
+      <v-ons-list-header>Event Picture</v-ons-list-header>
+      <v-ons-list-item :modifier="$ons.platform.isAndroid() ? 'nodivider' : ''" v-if="validator.submissionClicked&&!validator.picture">
+        <label class="center">
+          <b style="color:#96281B;">Please make sure you have uploaded picture</b>
+        </label>
+      </v-ons-list-item>
+      <v-ons-list-item :modifier="$ons.platform.isAndroid() ? 'nodivider' : ''">
+        <label class="center">
+          <v-ons-button modifier="large" style="background-color:#26A65B;">
+            <label for="upload-photo">
+              <v-ons-icon icon="ion-android-upload" size="30px"></v-ons-icon>
+              &nbsp;Upload Your Picture Here</label>
+            </v-ons-button>
+          <input type="file" @change="onFileChange" id="upload-photo" v-show="false">
+        </label>
+      </v-ons-list-item>
+      <v-ons-list-item :modifier="$ons.platform.isAndroid() ? 'nodivider' : ''" v-if="fileName!==''">
+        <label class="center">
+          <b style="color:#26A65B;text-align:center;">Uploaded: {{fileName}}</b>
+        </label>
+      </v-ons-list-item>
+      <v-ons-list-header>Event Information</v-ons-list-header>
       <v-ons-list-item :modifier="$ons.platform.isAndroid() ? 'nodivider' : ''" v-if="validator.submissionClicked&&!validator.nameDesc">
         <label class="center">
           <b style="color:#96281B;">Please make sure you have entered all fields for name and description</b>
@@ -30,7 +51,7 @@
           v-model="form.description"></textarea>
         </label>
       </v-ons-list-item>
-      <v-ons-list-header>Start and End</v-ons-list-header>
+      <v-ons-list-header>Date and Time</v-ons-list-header>
       <v-ons-list-item :modifier="$ons.platform.isAndroid() ? 'nodivider' : ''" v-if="validator.submissionClicked&&!validator.dateTime">
         <label class="center">
           <b style="color:#96281B;">Please make sure you have entered all fields for date and time</b>
@@ -74,7 +95,7 @@
           </v-ons-input>
         </label>
       </v-ons-list-item>
-       <v-ons-list-header>Address</v-ons-list-header>
+       <v-ons-list-header>Venue</v-ons-list-header>
        <v-ons-list-item :modifier="$ons.platform.isAndroid() ? 'nodivider' : ''" v-if="validator.submissionClicked&&!validator.address">
         <label class="center">
           <b style="color:#96281B;">Please make sure you have entered all fields for address</b>
@@ -113,20 +134,7 @@
           </v-ons-input>
         </label>
       </v-ons-list-item>
-      <v-ons-list-header>Event Picture</v-ons-list-header>
-      <v-ons-list-item :modifier="$ons.platform.isAndroid() ? 'nodivider' : ''" v-if="validator.submissionClicked&&!validator.picture">
-        <label class="center">
-          <b style="color:#96281B;">Please make sure you have uploaded picture</b>
-        </label>
-      </v-ons-list-item>
-      <v-ons-list-item :modifier="$ons.platform.isAndroid() ? 'nodivider' : ''">
-        <div class="left">
-          Picture
-        </div>
-        <label class="center">
-          <input type="file" @change="onFileChange">
-        </label>
-      </v-ons-list-item>
+      
     </v-ons-list>
           <v-ons-card>
               <v-ons-button modifier="large" @click="onFormSubmit()">Submit</v-ons-button>
@@ -149,6 +157,7 @@ export default {
   data() {
     return {
       state: 'initial',
+      fileName:'',
       form: {
         name: '',
         startDate: '',
@@ -195,6 +204,7 @@ export default {
       var files = e.target.files || e.dataTransfer.files;
       if (!files.length) console.log('image wrong')
       else console.log(files)
+      this.fileName = files[0].name
       this.$store.dispatch("ajax/uploadEventImage", files)
     },
     onFormSubmit () {

@@ -13,7 +13,7 @@
             </v-ons-card> -->
             <v-ons-card>
                 <v-ons-segment style="width: 100%;">
-                    <button @click="loadView(-1)">Products</button>
+                    <button @click="push(favorite.component, favorite.label)">Favorites</button>
                     <!-- <button @click="$store.dispatch('ajax/login')">Login</button> -->
                     <!-- <button @click="$store.dispatch('ajax/getWallet')">Get all products</button> -->
                     <!-- <button @click="loadView(1)">Gain</button> -->
@@ -80,6 +80,7 @@
 import Login from './Login.vue';
 import Camera from './Camera.vue';
 import Redeemed from './Redeemed.vue';
+import Favorites from './Favorites.vue';
 export default {
   data() {
     return {
@@ -95,6 +96,10 @@ export default {
         redeemed: {
             component: Redeemed,
             label: 'Redeemed Products'
+        },
+        favorite: {
+            component: Favorites,
+            label: 'Favorite Events'
         }
     };
   },
@@ -144,7 +149,16 @@ export default {
     }
   },
   beforeMount () {
-    console.log(this.$store.state.ajax.login)
+      console.log()
+    if(localStorage.getItem('token')!==null&&localStorage.getItem('token')!==''){
+        this.$store.commit("ajax/setLogin", true)
+        this.$store.dispatch("ajax/getWallet")
+        this.$store.dispatch("ajax/getAllProducts")
+        this.$store.dispatch("ajax/getAllQR")
+        this.$store.dispatch("ajax/getOwnEvent")
+        this.$store.dispatch("ajax/getAllEvent")
+        this.$store.dispatch("ajax/getAllFavoriteEvent")
+    }
     if(!this.$store.state.ajax.login) {
         this.forcePush(this.login.component, this.login.label)
     }

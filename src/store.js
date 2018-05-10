@@ -1,7 +1,10 @@
 import { baseUrl } from "./const.js";
 import axios from "axios";
 axios.defaults.baseURL = baseUrl;
-axios.defaults.withCredentials = true;
+// axios.defaults.withCredentials = true;
+axios.defaults.headers.common = {
+  'Authorization': 'Bearer '.concat(localStorage.getItem('token'))
+}
 // import { mapActions } from 'vuex'
 
 export default {
@@ -83,7 +86,8 @@ export default {
         products: [],
         allQR: [],
         allEvents: [],
-        allOwnEvents: []
+        allOwnEvents: [],
+        allFavoriteEvents: []
       },
       mutations: {
         setLogin(state, loginStatus) {
@@ -121,6 +125,9 @@ export default {
         },
         setAllOwnEvents(state, allOwnEvents) {
           state.allOwnEvents = allOwnEvents
+        },
+        setAllFavoriteEvents(state, allFavoriteEvents) {
+          state.allFavoriteEvents = allFavoriteEvents
         },
         setCurrentEventId(state, currentEventId) {
           state.currentEventId = currentEventId
@@ -167,15 +174,20 @@ export default {
           .put('auth', payload)
           .then(resp => {
             console.log(resp)
-            console.log(context)
+            // console.log(context)
+            localStorage.setItem('token', resp.data.token)
+            axios.defaults.headers.common = {
+              'Authorization': 'Bearer '.concat(localStorage.getItem('token'))
+            }
             context.commit("setLogin", true)
             context.commit("setLoginStatus", true)
             this.commit('navigator/pop', {root:true})
-            context.dispatch("getAllProducts")
             context.dispatch("getWallet")
+            context.dispatch("getAllProducts")
             context.dispatch("getAllQR")
             context.dispatch("getOwnEvent")
             context.dispatch("getAllEvent")
+            context.dispatch("getAllFavoriteEvent")
             // this.axios.defaults.headers.common = resp
             // this.commit("tabbar/set", 3, {root:true})
             
@@ -199,6 +211,7 @@ export default {
             // context.dispatch("getAllQR")
             // context.dispatch("getOwnEvent")
             // context.dispatch("getAllEvent")
+            localStorage.setItem('token', '')
             this.commit("splitter/toggle", false, {root:true})
             
           })
@@ -233,7 +246,7 @@ export default {
         },
         getAllQR (context) {
           axios
-          .get('product/qr/allQr')
+          .get('product/redeem/allQr')
           .then(resp => {
             console.log(resp)
             context.commit("setAllQR", resp.data)
@@ -317,6 +330,47 @@ export default {
             context.commit("setAddEventStatus", false)
           })
         },
+        addFavorite(context, credentials) {
+          console.log(credentials)
+          const payload = credentials
+          axios
+          .put('event/favorite', payload)
+          .then(resp => {
+            console.log(resp)
+            // context.dispatch("getOwnEvent")
+            // context.dispatch("getAllEvent")
+            context.dispatch("getEventDetail",{eventId:payload.eventId})
+            context.dispatch("getAllFavoriteEvent")
+          })
+          .catch(err => {
+            console.log(err.error)
+          })
+        },
+        removeFavorite(context, credentials) {
+          console.log(credentials)
+          const payload = credentials
+          axios
+          .delete('event/favorite/'+payload.eventId)
+          .then(resp => {
+            console.log(resp)
+            context.dispatch("getEventDetail",{eventId:payload.eventId})
+            context.dispatch("getAllFavoriteEvent")
+          })
+          .catch(err => {
+            console.log(err.error)
+          })
+        },
+        getAllFavoriteEvent (context) {
+          axios
+          .get('event/favorite')
+          .then(resp => {
+            console.log(resp)
+            context.commit("setAllFavoriteEvents", resp.data)
+          })
+          .catch(err => {
+            console.log(err)
+          })
+        },
         editEvent(context, credentials) {
           console.log(credentials)
           const payload = credentials
@@ -380,19 +434,12 @@ export default {
           .put('event/attend', payload)
           .then(resp => {
             console.log(resp)
-            // context.dispatch("getOwnEvent")
-            // context.dispatch("getAllEvent")
             context.dispatch("getWallet")
             context.commit("setAttendEventStatus", resp.data)
-            // context.commit("setAddEventStatus", true)
-            // context.commit("setCurrentEventId", '')
-            // context.commit("setCurrentEvent", {})
-            // this.commit('navigator/pop', {root:true})
           })
           .catch(err => {
             console.log(err)
             context.commit("setAttendEventStatus", false)
-            // context.commit("setAddEventStatus", false)
           })
       }
     }

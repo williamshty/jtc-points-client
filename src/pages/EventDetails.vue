@@ -26,9 +26,23 @@
                     <v-ons-col width="30px" vertical-align="center">
                         <v-ons-icon icon="ion-android-pin" size="30px"></v-ons-icon>
                     </v-ons-col>
-                    <v-ons-col vertical-align="center">
+                    <v-ons-col width="200px" vertical-align="center">
                         <b style="font-size:16px;padding-top:10px;">{{eventDetail.address}}
                             <br/>Singapore {{eventDetail.zip}}</b>
+                    </v-ons-col>
+                    <v-ons-col vertical-align="center">
+                        <v-ons-icon 
+                        v-if="eventDetail.favorite===false" 
+                        style="color:black" 
+                        icon="ion-android-star-outline" 
+                        size="40px"
+                        @click="addFavorite(eventDetail.eventId)"></v-ons-icon>
+                        <v-ons-icon 
+                        v-else
+                        style="color:#F7CA18" 
+                        icon="ion-android-star" 
+                        size="40px"
+                        @click="removeFavorite(eventDetail.eventId)"></v-ons-icon>
                     </v-ons-col>
                 </v-ons-row>
             </v-ons-card>
@@ -108,6 +122,12 @@ export default {
       else if (month===11) textMonth = 'Nov'
       else textMonth = 'Dec'
       return(day+' '+textMonth+' '+year)
+    },
+    addFavorite(eventId){
+      this.$store.dispatch("ajax/addFavorite",{eventId:eventId})
+    },
+    removeFavorite(eventId){
+      this.$store.dispatch("ajax/removeFavorite",{eventId:eventId})
     }
     
   }
