@@ -14,7 +14,7 @@
       </v-ons-row>
       <v-ons-row v-if="parseInt(product.inventory) < 10 && parseInt(product.inventory)!==0">
         <v-ons-col vertical-align="center"><b style="font-size:16px;color:red">Only {{product.inventory}} left</b></v-ons-col>
-        <v-ons-col width="40px"><v-ons-icon icon="ion-social-usd" size="40px"></v-ons-icon> </v-ons-col>
+        <!-- <v-ons-col width="40px"><v-ons-icon icon="ion-social-usd" size="40px"></v-ons-icon> </v-ons-col> -->
         <v-ons-col vertical-align="center"><b style="font-size:16px;">{{product.price}} points</b></v-ons-col>
         <v-ons-col vertical-align="center"><v-ons-button @click="redeemProduct(product.productId)">Redeem</v-ons-button></v-ons-col>
       </v-ons-row>
