@@ -4,7 +4,7 @@
   "version": "0.0.9",
   "author": "Shi Tianyuan <tianyuan.shi@u.nus.edu>",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --https --cert certs/server.crt --key certs/server.key --open --hot --host 0.0.0.0 --port 7000",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --https --cert certs/server.crt --key certs/server.key --open --hot --host 0.0.0.0 --port 8080",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "build:watch": "cross-env NODE_ENV=production WEBPACK_WATCH=true webpack --progress --hide-modules",
     "demo:index": "mv www/index.html www/main.html && sed -i 's/index\\.html/main\\.html/' www/demo.html && mv www/demo.html www/index.html",
