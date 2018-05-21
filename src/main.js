@@ -34,6 +34,30 @@ Object.defineProperty(Vue.prototype, '$moment', { get () { return moment } })
 // Object.values(OnsenComponents).forEach(component => Vue.component(component.name, component)); // For ESM
 Vue.component('custom-toolbar', CustomToolbar); // Common toolbar
 
+
+//Android Prod
+// document.addEventListener('deviceready', function() {
+//   new Vue({
+//     el: '#app',
+//     render: h => h(AppNavigator),
+//     store: new Vuex.Store(storeLike),
+//     moment,
+//     beforeCreate() {
+//       // Shortcut for Material Design
+//       Vue.prototype.md = this.$ons.platform.isAndroid();
+  
+//       // Set iPhoneX flag based on URL
+//       if (window.location.search.match(/iphonex/i)) {
+//         document.documentElement.setAttribute('onsflag-iphonex-portrait', '');
+//         document.documentElement.setAttribute('onsflag-iphonex-landscape', '');
+//       }
+//     }
+//   });
+//   window.navigator.splashscreen.hide()
+// }, false);
+
+
+//normal dev
 new Vue({
   el: '#app',
   render: h => h(AppNavigator),

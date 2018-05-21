@@ -10,9 +10,9 @@
         <v-ons-row>
       </v-ons-row>
       <v-ons-row>
-        <v-ons-col width="50px"></v-ons-col>
-        <v-ons-col width="50px"><v-ons-icon icon="ion-ios-clock" size="40px"></v-ons-icon> </v-ons-col>
-        <v-ons-col vertical-align="center"><b style="font-size:20px;">{{QR.dateCreated}}</b></v-ons-col>
+        <v-ons-col width="20px"></v-ons-col>
+        <v-ons-col width="120px"><span style="font-size:18px;">Redeemed at:</span></v-ons-icon> </v-ons-col>
+        <v-ons-col ><b style="font-size:18px;">{{QR.dateCreated.substring(0, QR.dateCreated.length - 3)}}</b></v-ons-col>
       </v-ons-row>
        </div>
     </v-ons-card>
@@ -28,16 +28,6 @@ export default {
     };
   },
   methods: {
-      redeemProduct (productId) {
-          console.log(productId)
-        this.$store.dispatch("ajax/redeemProduct", {productId:productId})
-        setTimeout(()=>{
-            this.$store.dispatch('ajax/getWallet')
-            this.$store.dispatch('ajax/getAllProducts')
-            this.$store.dispatch('ajax/getAllQR')
-            this.$store.commit('navigator/pop')
-        }, 3000)   
-      }
   },
   beforeMount() {
   }

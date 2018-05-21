@@ -2,6 +2,7 @@
   <v-ons-page>
     <custom-toolbar v-bind="toolbarInfo"></custom-toolbar>
     <qrcode-reader @decode="onDecode"></qrcode-reader>
+    {{QR_Content}}
     <h3 v-if="this.QR_Content!==''">QR Content Loaded! Please wait</h3>
     <v-ons-alert-dialog modifier="rowfooter"
       :visible.sync="attendSuccessDialogVisible"
@@ -23,6 +24,8 @@
         <v-ons-alert-dialog-button @click="attendFailDialogVisible = false">Confirm</v-ons-alert-dialog-button>
       </template>
     </v-ons-alert-dialog>
+    <!-- <div @click='TakePictureType(1)'>相机</div>  
+      <div @click='TakePictureType(2)'>图库</div>   -->
   </v-ons-page>
 </template>
 
@@ -58,6 +61,28 @@ export default {
       this.QR_Content = content
       this.$store.dispatch('ajax/attendEvent', {encode: content})
     }
+    // TakePicture: function (mySourceType) {  
+    //    navigator.camera.getPicture(this.onSuccess, this.onFail, {  
+    //    quality: 50,  
+    //    destinationType: Camera.DestinationType.DATA_URL,  
+    //    encodingType: Camera.EncodingType.JPEG,  
+    //    sourceType: mySourceType  
+    //   })  
+    // },
+    // dataURLtoFile: function (dataurl, filename) {  
+    //     var arr = dataurl.split(',')  
+    //     var mime = arr[0].match(/:(.*?);/)[1]  
+    //     var bstr = window.atob(arr[1])  
+    //     var n = bstr.length  
+    //     var u8arr = new Uint8Array(n)  
+    //     while (n--) {  
+    //       u8arr[n] = bstr.charCodeAt(n)  
+    //     }  
+    //     var blob = new Blob([u8arr], {type: mime})  
+    //     blob.lastModifiedDate = new Date()  
+    //     blob.name = filename  
+    //     return blob
+    // }  
   }
 };
 </script>
