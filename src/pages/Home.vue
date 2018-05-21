@@ -22,7 +22,7 @@
             <v-ons-icon class="card__icon--left" icon="ion-star" size="40px"></v-ons-icon>
                 <div class="card__caption">Favorite</div>
                 <div v-if="this.$store.state.ajax.allFavoriteEvents.length!==0" class="card__subtext">You have <b>{{this.$store.state.ajax.allFavoriteEvents.length}}</b> favorite events</div>
-                <div v-else class="card__subtext">You do not have any favorite events yet</div>
+                <div v-else class="card__subtext">You do not have any favorite events</div>
             
         </v-ons-card>
 
@@ -30,7 +30,7 @@
             <v-ons-icon class="card__icon--left" icon="ion-trophy" size="40px"></v-ons-icon>
                 <div class="card__caption">Redeemed</div>
                 <div v-if="this.$store.state.ajax.allQR.length!==0" class="card__subtext">You have redeemed <b>{{this.$store.state.ajax.allQR.length}}</b> products</div>
-                <div v-else class="card__subtext">You have not redeemed any product yet</div>
+                <div v-else class="card__subtext">You have not redeemed any product</div>
             
         </v-ons-card>
 
