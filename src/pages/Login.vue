@@ -100,5 +100,7 @@ export default {
 </script>
 
 <style scoped>
-
+.page__background{
+  background-image: url(../../static/images/regal.png);
+}
 </style>

@@ -3,9 +3,9 @@
         <v-ons-card>
 
             <v-ons-card class="card-wallet">
-                <v-ons-icon icon="md-balance-wallet" size="100px" style="position:absolute;left:50%;top:-3.8%;transform:translate(-50%,50%)"></v-ons-icon>
-                <h4 style="text-align:center;vertical-align:middle;margin-top:30%;font-size:20px;">Your Balance:</h4>
-                <h1 style="text-align:center;vertical-align:middle;margin-top:-3%;font-size:40px;">
+                <v-ons-icon icon="md-balance-wallet" size="100px" style="" class="wallet-icon"></v-ons-icon>
+                <h4 style="text-align:center;vertical-align:middle;margin-top:5rem;font-size:20px;">Your Balance:</h4>
+                <h1 style="text-align:center;vertical-align:middle;margin-top:-0.2rem;font-size:40px;">
                     {{this.$store.state.ajax.wallet.balance}} points</h1>
             </v-ons-card>
             <!-- <v-ons-card>
@@ -18,12 +18,17 @@
                     <button @click="push(attend.component, attend.label)">Attend</button>
                 </v-ons-segment>
             </v-ons-card> -->
+        <v-ons-card class="card-add-new" @click="push(addNew.component, addNew.label)">
+            <v-ons-icon class="card__icon--left" icon="fa-plus-circle" size="40px"></v-ons-icon>
+                <div class="card__caption">Add Event</div>
+                <div class="card__subtext">Add a new event</div>
+        </v-ons-card>
+        
         <v-ons-card class="card-favorite" @click="push(favorite.component, favorite.label)">
             <v-ons-icon class="card__icon--left" icon="ion-star" size="40px"></v-ons-icon>
                 <div class="card__caption">Favorite</div>
                 <div v-if="this.$store.state.ajax.allFavoriteEvents.length!==0" class="card__subtext">You have <b>{{this.$store.state.ajax.allFavoriteEvents.length}}</b> favorite events</div>
                 <div v-else class="card__subtext">You do not have any favorite events</div>
-            
         </v-ons-card>
 
         <v-ons-card class="card-redeemed" @click="push(redeemed.component, redeemed.label)">
@@ -39,56 +44,7 @@
                 <div class="card__caption">Attend</div>
                 <div class="card__subtext">Open the QR scanner to scan the event QR code</div>
         </v-ons-card>
-            <!-- <v-ons-list-header>Transaction History</v-ons-list-header>
-            <v-ons-list>
-                <v-ons-list-item >
-                    <div class="left">
-                        <v-ons-icon style="color:green;" icon="ion-plus-round" class="list-item__icon"></v-ons-icon>
-                    </div>
-                    <div class="center">
-                        Gain from XXXX Event
-                    </div>
-                    <div class="right" style="font-weight:bold;color:green">
-                        +5
-                    </div>
-                </v-ons-list-item>
-                <v-ons-list-item >
-                    <div class="left">
-                        <v-ons-icon style="color:red;" icon="ion-minus-round" class="list-item__icon"></v-ons-icon>
-                    </div>
-                    <div class="center">
-                        Redeem Orange Juice
-                    </div>
-                     <div class="right" style="font-weight:bold;color:red">
-                        -10
-                    </div>
-                </v-ons-list-item>
-                <v-ons-list-item >
-                    <div class="left">
-                        <v-ons-icon style="color:green;" icon="ion-plus-round" class="list-item__icon"></v-ons-icon>
-                    </div>
-                    <div class="center">
-                        Gain from XXXX Event
-                    </div>
-                    <div class="right" style="font-weight:bold;color:green">
-                        +15
-                    </div>
-                </v-ons-list-item>
-                <v-ons-list-item >
-                    <div class="left">
-                        <v-ons-icon style="color:red;" icon="ion-minus-round" class="list-item__icon"></v-ons-icon>
-                    </div>
-                    <div class="center">
-                        Set up YYY Event
-                    </div>
-                     <div class="right" style="font-weight:bold;color:red">
-                        -20
-                    </div>
-                </v-ons-list-item>
-
-            </v-ons-list> -->
-
-        </v-ons-card>
+    </v-ons-card>
 
     </v-ons-page>
 </template>
@@ -97,6 +53,7 @@ import Login from './Login.vue';
 import Camera from './Camera.vue';
 import Redeemed from './Redeemed.vue';
 import Favorites from './Favorites.vue';
+import AddNewEvent from './AddNewEvent.vue';
 export default {
   data() {
     return {
@@ -116,6 +73,10 @@ export default {
         favorite: {
             component: Favorites,
             label: 'Favorite Events'
+        },
+        addNew: {
+            component: AddNewEvent,
+            label: 'Add New Event'
         }
     };
   },
@@ -196,6 +157,12 @@ ons-card {
   cursor: pointer;
   color: #333;
 }
+.wallet-icon {
+    position:absolute;
+    left:50%;
+    top:-1.6rem;
+    transform:translate(-50%,50%);
+}
 
 .card__title,
 .card--material__title {
@@ -239,10 +206,14 @@ ons-card {
 }
 .card-redeemed{
     height: 6rem;
-    background-image: linear-gradient(to right,rgba(5, 120, 130,0.8),rgba(5, 120, 130,0.55))
+    background-image: linear-gradient(to right,rgba(0, 87, 185,0.9),rgba(0, 87, 185,0.55))
 }
 .card-attend{
     height: 6rem;
-    background-image: linear-gradient(to right,rgba(0, 87, 185,0.9),rgba(0, 87, 185,0.55))
+    background-image: linear-gradient(to right,rgba(5, 120, 130,0.8),rgba(5, 120, 130,0.55))
+}
+.card-add-new{
+    height: 6rem;
+    background-image: linear-gradient(to right,rgba(172, 25, 52, 0.9),rgba(172, 25, 52,0.55))
 }
 </style>
