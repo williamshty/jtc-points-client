@@ -23,7 +23,17 @@
                 <div class="card__caption">Add Event</div>
                 <div class="card__subtext">Add a new event</div>
         </v-ons-card>
-        
+        <v-ons-card class="card-attend" @click="push(attend.component, attend.label)">
+            <v-ons-icon class="card__icon--left" icon="ion-qr-scanner" size="40px"></v-ons-icon>
+                <div class="card__caption">Attend</div>
+                <div class="card__subtext">Open the QR scanner to scan the event QR code</div>
+        </v-ons-card>
+        <v-ons-card class="card-redeemed" @click="push(redeemed.component, redeemed.label)">
+            <v-ons-icon class="card__icon--left" icon="ion-trophy" size="40px"></v-ons-icon>
+                <div class="card__caption">Redeemed</div>
+                <div v-if="this.$store.state.ajax.allQR.length!==0" class="card__subtext">You have redeemed <b>{{this.$store.state.ajax.allQR.length}}</b> products</div>
+                <div v-else class="card__subtext">You have not redeemed any product</div>
+        </v-ons-card>
         <v-ons-card class="card-favorite" @click="push(favorite.component, favorite.label)">
             <v-ons-icon class="card__icon--left" icon="ion-star" size="40px"></v-ons-icon>
                 <div class="card__caption">Favorite</div>
@@ -31,19 +41,7 @@
                 <div v-else class="card__subtext">You do not have any favorite events</div>
         </v-ons-card>
 
-        <v-ons-card class="card-redeemed" @click="push(redeemed.component, redeemed.label)">
-            <v-ons-icon class="card__icon--left" icon="ion-trophy" size="40px"></v-ons-icon>
-                <div class="card__caption">Redeemed</div>
-                <div v-if="this.$store.state.ajax.allQR.length!==0" class="card__subtext">You have redeemed <b>{{this.$store.state.ajax.allQR.length}}</b> products</div>
-                <div v-else class="card__subtext">You have not redeemed any product</div>
-            
-        </v-ons-card>
-
-        <v-ons-card class="card-attend" @click="push(attend.component, attend.label)">
-            <v-ons-icon class="card__icon--left" icon="ion-qr-scanner" size="40px"></v-ons-icon>
-                <div class="card__caption">Attend</div>
-                <div class="card__subtext">Open the QR scanner to scan the event QR code</div>
-        </v-ons-card>
+        
     </v-ons-card>
 
     </v-ons-page>
@@ -202,7 +200,7 @@ ons-card {
 }
 .card-favorite{
     height: 6rem;
-    background-image: linear-gradient(to right,rgba(140, 10, 85,0.9),rgba(140, 10, 85,0.55))
+    background-image: linear-gradient(to right,rgba(5, 120, 130,0.8),rgba(5, 120, 130,0.55))
 }
 .card-redeemed{
     height: 6rem;
@@ -210,7 +208,7 @@ ons-card {
 }
 .card-attend{
     height: 6rem;
-    background-image: linear-gradient(to right,rgba(5, 120, 130,0.8),rgba(5, 120, 130,0.55))
+    background-image: linear-gradient(to right,rgba(140, 10, 85,0.9),rgba(140, 10, 85,0.55))
 }
 .card-add-new{
     height: 6rem;

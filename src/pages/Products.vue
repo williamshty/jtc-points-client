@@ -20,13 +20,13 @@
       </v-ons-row>
       <v-ons-row v-else-if="parseInt(product.inventory) >= 10">
         <v-ons-col vertical-align="center"><b style="font-size:16px;color:green">Available</b></v-ons-col>
-        <v-ons-col width="40px"><v-ons-icon icon="ion-social-usd" size="40px"></v-ons-icon> </v-ons-col>
+        <v-ons-col width="40px"></v-ons-col>
         <v-ons-col vertical-align="center"><b style="font-size:16px;">{{product.price}} points</b></v-ons-col>
         <v-ons-col vertical-align="center"><v-ons-button @click="redeemProduct(product.productId)">Redeem</v-ons-button></v-ons-col>
       </v-ons-row>
       <v-ons-row v-else-if="parseInt(product.inventory) <=0">
         <v-ons-col vertical-align="center"><b style="font-size:16px;color:red">Unavailable</b></v-ons-col>
-        <v-ons-col width="40px"><v-ons-icon icon="ion-social-usd" size="40px"></v-ons-icon> </v-ons-col>
+        <v-ons-col width="40px"></v-ons-col>
         <v-ons-col vertical-align="center"><b style="font-size:16px;">{{product.price}} points</b></v-ons-col>
         <v-ons-col vertical-align="center"><v-ons-button :disabled="true" @click="redeemProduct(product.productId)">Redeem</v-ons-button></v-ons-col>
       </v-ons-row>
