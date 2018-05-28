@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "live-server-https": "0.0.2",
     "moment": "^2.22.1",
     "onsenui": "~2.8.0",
     "vue": "^2.5.3",
