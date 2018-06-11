@@ -17,7 +17,7 @@ npm run dev
 # build for production with minification
 npm run build
 ```
-- __C:\Users\e0012\Desktop\jtc-points-client__
+- File Directory
   - __certs__
     - [server.csr]
     - [ca.crt]
